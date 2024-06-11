@@ -13,7 +13,7 @@ async function bootstrap() {
 
   // Настройка CORS
   app.enableCors({
-    origin: 'http://localhost:3000', // URL вашего React-приложения
+    origin: 'http://localhost:3001', // URL вашего React-приложения
     credentials: true, // Разрешение отправки куки
   });
 
