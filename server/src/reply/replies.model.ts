@@ -8,7 +8,7 @@ import {
 } from 'sequelize-typescript';
 import { Comment } from '../comment/comment.model';
 
-@Table
+@Table({ tableName: 'reply' })
 export class Reply extends Model<Reply> {
   @Column({
     type: DataType.TEXT,

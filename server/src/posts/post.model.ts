@@ -1,12 +1,5 @@
-import {
-  BelongsTo,
-  Column,
-  DataType,
-  ForeignKey,
-  Model,
-  Table,
-} from 'sequelize-typescript';
-import { User } from 'src/users/users.model';
+import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
+import { Comment } from '../comment/comment.model';
 
 @Table({ tableName: 'posts' })
 export class Post extends Model<Post> {
@@ -34,10 +27,7 @@ export class Post extends Model<Post> {
 
   @Column({ type: DataType.TEXT })
   text: string;
-  @ForeignKey(() => User)
-  @Column({ type: DataType.INTEGER })
-  userId: number;
 
-  @BelongsTo(() => User)
-  author: User;
+  @HasMany(() => Comment)
+  comments: Comment[];
 }

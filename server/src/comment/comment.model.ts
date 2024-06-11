@@ -1,4 +1,12 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import {
+  BelongsTo,
+  Column,
+  DataType,
+  ForeignKey,
+  Model,
+  Table,
+} from 'sequelize-typescript';
+import { Post } from '../posts/post.model';
 
 @Table({ tableName: 'comments' })
 export class Comment extends Model<Comment> {
@@ -16,6 +24,10 @@ export class Comment extends Model<Comment> {
   @Column({ type: DataType.STRING })
   text: string;
 
-  @Column({ type: DataType.STRING, allowNull: false })
-  postId: string;
+  @ForeignKey(() => Post)
+  @Column({ type: DataType.INTEGER, allowNull: false })
+  postId: number;
+
+  @BelongsTo(() => Post)
+  post: Post;
 }

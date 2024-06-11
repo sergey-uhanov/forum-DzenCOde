@@ -102,6 +102,7 @@ const TopicPage: FunctionComponent<TopicPageProps> = () => {
 								width: 350,
 								maxHeight: { xs: 233, md: 167 },
 								maxWidth: { xs: 350, md: 250 },
+								objectFit: 'contain',
 							}}
 							alt='Example Image'
 							src={`${API_URL}${post?.url_file}`}
