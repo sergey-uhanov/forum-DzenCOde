@@ -9,25 +9,31 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - '5432:5432'
 
   backend:
     build: ./server
     environment:
-      DATABASE_HOST: postgres
-      DATABASE_PORT: 5432
-      DATABASE_USER: user
-      DATABASE_PASSWORD: password
-      DATABASE_NAME: mydatabase
+      HOST: postgres
+      DB_PORT: 5432
+      USER: user
+      PASSWORD: password
+      DB: mydatabase
+      PRIVATE_KEY: secret_key_safasf
+      PORT: 6060
+
     depends_on:
       - postgres
     ports:
-      - "3000:3000"
+      - '6060:6060'
 
   frontend:
     build: ./client
+    environment:
+      REACT_APP_API_URL: http://localhost:6060/
+
     ports:
-      - "3001:3000"
+      - '3001:3000'
 
 volumes:
   postgres_data:
