@@ -16,6 +16,10 @@ COPY . .
 # Сборка TypeScript кода
 RUN npm run build
 
+# Запуск миграций и сидов
+RUN npx sequelize-cli db:migrate
+RUN npx sequelize-cli db:seed:all
+
 # Открываем порт приложения
 EXPOSE 3000
 
