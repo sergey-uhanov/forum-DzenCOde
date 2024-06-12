@@ -1,4 +1,10 @@
+import { IsInt, IsNotEmpty, IsString } from 'class-validator-nestjs';
+
 export class BanUserDto {
-    readonly userId: number;
-    readonly banReason: string;
+  @IsInt({ message: 'Должно быть числом' })
+  readonly userId: number;
+
+  @IsString({ message: 'Должно быть строкой' })
+  @IsNotEmpty({ message: 'Причина бана не может быть пустой' })
+  readonly banReason: string;
 }

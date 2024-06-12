@@ -40,7 +40,7 @@ export class CommentController {
   @Post()
   async createComment(@Body() createCommentDto: CreateCommentDto) {
     const comment = await this.commentService.createComment(createCommentDto);
-    this.commentGateway.server.emit('newComment', comment); // Отправка сообщения через WebSocket
+    this.commentGateway.server.emit('newComment', comment);
     return comment;
   }
 

@@ -9,7 +9,7 @@ export class CaptchaController {
   @Get()
   getCaptcha(@Res() res: Response, @Session() session: Record<string, any>) {
     const captcha = this.captchaService.generateCaptcha();
-    session.captcha = captcha.text; // Сохраняем captcha в сессии
+    session.captcha = captcha.text;
     console.log(session);
 
     res.type('svg');
@@ -21,10 +21,7 @@ export class CaptchaController {
     @Query('input') input: string,
     @Session() session: Record<string, any>,
   ): string {
-    const isValid = this.captchaService.verifyCaptcha(
-      input,
-      session.captcha, // Доступ к captcha из сессии
-    );
+    const isValid = this.captchaService.verifyCaptcha(input, session.captcha);
 
     if (isValid) {
       return 'CAPTCHA verification passed.';

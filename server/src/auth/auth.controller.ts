@@ -10,16 +10,17 @@ export class AuthController {
   @Post('/login')
   async login(@Body() userDto: CreateUserDto, @Res() res: Response) {
     const { token, user } = await this.authService.login(userDto);
-    res.cookie('token', token, { httpOnly: true, secure: true }); // Устанавливаем токен в HttpOnly cookie
+    res.cookie('token', token, { httpOnly: true, secure: true });
     res.send({ user });
   }
 
   @Post('/registration')
   async registration(@Body() userDto: CreateUserDto, @Res() res: Response) {
     const { token, user } = await this.authService.registration(userDto);
-    res.cookie('token', token, { httpOnly: true, secure: true }); // Устанавливаем токен в HttpOnly cookie
+    res.cookie('token', token, { httpOnly: true, secure: true });
     res.send({ user });
   }
+
   @Post('/logout')
   logout(@Res() res: Response) {
     res.clearCookie('token', { httpOnly: true, secure: true });
