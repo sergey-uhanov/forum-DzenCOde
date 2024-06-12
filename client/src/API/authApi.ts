@@ -39,7 +39,7 @@ export default class AuthApi {
 				withCredentials: true,
 			}
 		)
-		if (response.status === 200) {
+		if (response.status === 201) {
 			return response.data.user
 		} else {
 			throw new Error(response.data.message || 'Ошибка регестрации')

@@ -111,7 +111,7 @@ const TopicPage: FunctionComponent<TopicPageProps> = () => {
 				<Stack spacing={2} sx={{ ml: 10, mt: 5 }}>
 					<SortSelect sort={sort} setSort={setSort} />
 					{comments.map((comment, index) => (
-						<CommentCard key={index} comment={comment} />
+						<CommentCard key={comment.id} comment={comment} />
 					))}
 				</Stack>
 				<Stack>

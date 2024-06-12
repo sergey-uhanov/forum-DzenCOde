@@ -20,7 +20,7 @@ async function bootstrap() {
   // Настройка сессий
   app.use(
     session({
-      secret: process.env.PRIVATE_KEY, // Ваш секретный ключ
+      secret: process.env.PRIVATE_KEY,
       resave: true,
       saveUninitialized: true,
       cookie: {

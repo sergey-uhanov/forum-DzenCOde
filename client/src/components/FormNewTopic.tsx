@@ -64,6 +64,7 @@ const FormNewTopic: FunctionComponent<FormNewTopicProps> = () => {
 		if (selectedFile) {
 			const isValid = validateFile(selectedFile)
 			if (isValid) {
+				setError('')
 				await setFile(selectedFile)
 				if (selectedFile.type.startsWith('image/')) {
 					setFilePreview(URL.createObjectURL(selectedFile))
@@ -137,11 +138,8 @@ const FormNewTopic: FunctionComponent<FormNewTopicProps> = () => {
 						url_file: response.path,
 					}
 
-					// Используем функцию обратного вызова для обновления состояния
 					setFormData(updatedFormData)
-					console.log(updatedFormData)
 
-					// Выполняем отправку данных только после обновления состояния
 					await axios.post(`${API_URL}posts`, updatedFormData, {
 						headers: {
 							'Content-Type': 'application/json',
@@ -295,14 +293,22 @@ const FormNewTopic: FunctionComponent<FormNewTopicProps> = () => {
 
 					{error && <Typography color='error'>{error}</Typography>}
 					{
-						<Box mt={2}>
+						<Box mt={2} sx={{ objectFit: 'contain' }}>
 							{file && file.type.startsWith('image/') ? (
-								<img
-									src={filePreview!}
-									alt='Preview'
-									width='150'
-									height='150'
-								/>
+								<>
+									<Box
+										component='img'
+										sx={{
+											height: 233,
+											width: 350,
+											maxHeight: { xs: 233, md: 167 },
+											maxWidth: { xs: 350, md: 250 },
+											objectFit: 'contain',
+										}}
+										alt='Example Image'
+										src={filePreview!}
+									/>
+								</>
 							) : (
 								''
 							)}
@@ -357,7 +363,18 @@ const FormNewTopic: FunctionComponent<FormNewTopicProps> = () => {
 							dangerouslySetInnerHTML={{ __html: formData.text }}
 						/>
 						{file && file.type.startsWith('image/') && (
-							<img src={filePreview!} alt='Preview' width='150' height='150' />
+							<Box
+								component='img'
+								sx={{
+									height: 233,
+									width: 350,
+									maxHeight: { xs: 233, md: 167 },
+									maxWidth: { xs: 350, md: 250 },
+									objectFit: 'contain',
+								}}
+								alt='Example Image'
+								src={filePreview!}
+							/>
 						)}
 						{file && file.type.startsWith('text/') && (
 							<Typography>Файл загружен: {file?.name}</Typography>
